@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-WSK='wsk -i'
+WSK="$OPENWHISK_HOME/bin/wsk"
 
 function deploy() {
     set -e
     gradle jar
     $WSK package update qr
-    $WSK action update qr/generate build/libs/wsk-qr-1.0.jar --main qr.Generate -a web-export true
-    $WSK action update qr/ui src/main/js/qr/ui.js -a web-export true
-    $WSK action update host src/main/js/host.js
+    $WSK action update qr/generate build/libs/wsk-qr-1.0.jar --main qr.Generate -m 128 -a web-export true
+    $WSK action update qr/ui src/main/js/qr/ui.js -m 128 -a web-export true
+    $WSK action update host src/main/js/host.js -m 128
 }
 
 function teardown() {
@@ -32,5 +32,8 @@ teardown
 ;;
 --host )
 host
+;;
+* )
+echo "Usage $0 [--deploy, --teardown, --host]"
 ;;
 esac
