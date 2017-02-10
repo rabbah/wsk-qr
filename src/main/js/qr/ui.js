@@ -31,13 +31,14 @@ function main(args) {
     
     <div class="container" style="width:650px">
       <h2>OpenWhisk web-actions: generate QR code</h2>
-      <form>
+      <form id="qrform" onsubmit="generate(); return false">
         <div class="form-group">
-          <input id="qrtext" class="form-control"
+          <input id="qrtext" class="form-control" style="float:left;width:85%;"
                  type="text"
                  name="text"
                  placeholder="type some text here and get a QR code for it"
                  value=""/>
+          <button id="qrsubmit" type="button" class="btn btn-primary" style="float:right">Generate</button>
         </div>
         <div style="margin:auto" id="qrpng">
         </div>
@@ -64,15 +65,18 @@ function main(args) {
       })()
 
       var last = undefined
-      $("#qrtext").keyup(function() {
-        delay(function() {
-          var txt = $("#qrtext").val().trim()
-          if (last != txt) {
-              last = txt
-              $("#qrpng").html('<img style="display:block; margin:auto;" src="${generatorAction}.http?text='+txt+'" />')
-          }
-        }, 500)
+
+      $("#qrsubmit").click(function() {
+        generate()
       })
+
+      function generate() {
+        var txt = $("#qrtext").val().trim()
+        if (last != txt) {
+           last = txt
+           $("#qrpng").html('<img style="display:block; margin:auto;padding-top:10px" src="${generatorAction}.http?text='+txt+'" />')
+        }
+      }
     </script>
   </body>
 </html>`
