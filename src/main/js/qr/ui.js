@@ -2,7 +2,7 @@ function main(args) {
     let host = process.env['__OW_API_HOST']
     let ns = process.env['__OW_NAMESPACE']
     // assumes action path is /ns/qr/generate (namespace is ns, package is qr, action is generate)
-    let generatorAction = `${host}/api/v1/experimental/web/${ns}/qr/generate`
+    let generatorAction = (args.domain || `${host}/api/v1/experimental/web/${ns}`) + '/qr/generate'
 
     let html = 
 `<!DOCTYPE html>
@@ -36,7 +36,8 @@ function main(args) {
           <input id="qrtext" class="form-control" style="float:left;width:85%;"
                  type="text"
                  name="text"
-                 placeholder="type some text here and get a QR code for it"
+                 maxlength="1024"
+                 placeholder="enter text here and click generate to get its QR code"
                  value=""/>
           <button id="qrsubmit" type="button" class="btn btn-primary" style="float:right">Generate</button>
         </div>
@@ -56,14 +57,6 @@ function main(args) {
     </div>
 
     <script type="text/javascript">
-      var delay = (function(){
-        var timer = 0
-        return function(callback, ms){
-          clearTimeout (timer)
-          timer = setTimeout(callback, ms)
-        }
-      })()
-
       var last = undefined
 
       $("#qrsubmit").click(function() {
@@ -74,7 +67,7 @@ function main(args) {
         var txt = $("#qrtext").val().trim()
         if (last != txt) {
            last = txt
-           $("#qrpng").html('<img style="display:block; margin:auto;padding-top:10px" src="${generatorAction}.http?text='+txt+'" />')
+           $("#qrpng").html('<img style="display:block; margin:auto;padding-top:10px" src="${generatorAction}.http?text='+escape(txt)+'" />')
         }
       }
     </script>

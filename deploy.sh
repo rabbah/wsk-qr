@@ -1,13 +1,15 @@
+
 #!/usr/bin/env bash
 
 WSK="$OPENWHISK_HOME/bin/wsk"
+DOMAIN=${CUSTOM_DOMAIN:-false}
 
 function deploy() {
     set -e
     gradle jar
     $WSK package update qr
     $WSK action update qr/generate build/libs/wsk-qr-1.0.jar --main qr.Generate -m 128 -a web-export true
-    $WSK action update qr/ui src/main/js/qr/ui.js -m 128 -a web-export true
+    $WSK action update qr/ui src/main/js/qr/ui.js -m 128 -p domain $DOMAIN -a web-export true -a final true
     $WSK action update host src/main/js/host.js -m 128
 }
 
