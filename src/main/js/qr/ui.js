@@ -2,7 +2,7 @@ function main(args) {
     let host = process.env['__OW_API_HOST']
     let ns = process.env['__OW_NAMESPACE']
     // assumes action path is /ns/qr/generate (namespace is ns, package is qr, action is generate)
-    let generatorAction = (args.domain || `${host}/api/v1/experimental/web/${ns}`) + '/qr/generate'
+    let generatorAction = (args.domain || `${host}/api/v1/web/${ns}`) + '/qr/generate'
 
     let html = 
 `<!DOCTYPE html>
