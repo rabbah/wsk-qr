@@ -10,18 +10,16 @@ function deploy() {
     $WSK package update qr
     $WSK action update qr/generate build/libs/wsk-qr-1.0.jar --main qr.Generate -m 128 --web true
     $WSK action update qr/ui src/main/js/qr/ui.js -m 128 -p domain $DOMAIN --web true
-    $WSK action update host src/main/js/host.js -m 128
 }
 
 function teardown() {
-    $WSK action delete host
     $WSK action delete qr/ui
     $WSK action delete qr/generate
     $WSK package delete qr
 }
 
 function host() {
-    URL=`$WSK action invoke host -br -p path qr/ui.html | grep url | awk -F" " '{print $2}'`
+    URL=`$WSK action get qr/ui --url | tail -1 | awk '{print $1".html"}'`
     echo open $URL
 }
 
