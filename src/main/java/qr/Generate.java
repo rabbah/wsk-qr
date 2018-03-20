@@ -28,7 +28,7 @@ public class Generate {
 
     JsonObject response = new JsonObject();
     JsonObject headers = new JsonObject();
-    headers.addProperty("content-type", "image/png");
+    headers.addProperty("content-type", "image/png; charset=UTF-8");
     response.add("headers", headers);
     response.addProperty("body", output);
     return response;
