@@ -47,8 +47,8 @@ function main(args) {
         <footer class="footer">
           <div class="container" style="width:100%">
             <p class="text-muted" style="text-align:center;margin-top:12px">
-              Try <a href="https://ibm.biz/openwhisk">OpenWhisk on IBM
-              Bluemix</a> today or visit <a href="http://openwhisk.org">Apache
+              Try <a href="https://ibm.biz/openwhisk">OpenWhisk with IBM
+              Cloud Functions</a> today or visit <a href="http://openwhisk.org">Apache
               Openwhisk</a> to learn more.
             </p>
           </div>
