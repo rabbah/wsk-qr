@@ -4,7 +4,7 @@ Create a serverless UI to generate QR codes from text using OpenWhisk.
 * The UI is a Node.js action in [src/main/js/qr/ui.js](src/main/js/qr/ui.js).
 
 To build and deploy the QR generator and web UI, you'll need the OpenWhisk `wsk` CLI.
-The quickest way to get started is to sign up and download it from [OpenWhisk on IBM Bluemix](https://ibm.biz/openwhisk).
+The quickest way to get started is to sign up and download it from [IBM Cloud Functions](https://ibm.biz/openwhisk).
 You'll also need `gradle` to build the Java action.
 
 How to build and deploy:
